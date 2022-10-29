@@ -2,21 +2,38 @@ package br.puc.tp_final.stock;
 
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
+
 
 //http://localhost:8080/stock-ms/rest/stock/status/1
 
 @Path("stock")
-@Produces({"application/json"})
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class StockController {
 
     @EJB
     private StockService stockService;
 
     @POST
-    @Path("write_off")
+    @Path("")
+    public Response createStock(StockDTO stockDTO, @Context UriInfo uriInfo) {
+        var stock = stockService.loadItemsToStock(stockDTO);
+        UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
+        uriBuilder.path(String.valueOf(stock.getId()));
+
+        return Response.created(uriBuilder.build()).build();
+    }
+
+    @POST
+    @Path("/{id}/items/{item}/write_off")
     @Consumes("application/json")
-    public Stock pay(String item) {
-        return stockService.write_off(item);
+    public Response downStock(@PathParam("id") Long id, @PathParam("item") String item, @Context UriInfo uriInfo) {
+        var stock = stockService.downStock(id, item);
+        UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
+        uriBuilder.path(String.valueOf(stock.getId()));
+
+        return Response.ok(uriBuilder.build()).build();
     }
 
     @GET
@@ -26,9 +43,4 @@ public class StockController {
         return stockService.status(id);
     }
 
-    @POST
-    @Path("load")
-    public String load() {
-       return stockService.loadItemsToStock();
-    }
 }

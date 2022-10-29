@@ -3,6 +3,9 @@ package br.puc.tp_final.stock;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.core.Response;
+import jakarta.xml.ws.http.HTTPException;
 
 import java.util.Objects;
 import java.util.Random;
@@ -13,39 +16,50 @@ public class StockService {
     @PersistenceContext(unitName = "persistence-unit")
     private EntityManager entityManager;
 
-    public Stock write_off(String item) {
-        return new Stock();
+    public Stock downStock(Long id, String item) {
+        if (chanceOfSuccess()) {
+            Stock stock = entityManager.find(Stock.class, id);
+            stock.removeItem(item);
+            return entityManager.merge(stock);
+        }
+        throw new HTTPException(Response.Status.CONFLICT.getStatusCode());
     }
 
     public String status(Long id) {
         if (chanceOfSuccess()) {
-            Stock stock = entityManager.find(Stock.class, id);
+            Stock stock = findStockById(id);
+
             if (!stock.getItems().isEmpty()) {
                 return String.valueOf(stock.getItems().size());
             }
         }
-        return "TODO";
+        throw new HTTPException(Response.Status.CONFLICT.getStatusCode());
     }
 
+    private Stock findStockById(Long id) {
+        Stock stock = entityManager.find(Stock.class, id);
+
+        if(Objects.isNull(stock)){
+            throw new NotFoundException("Stock not found.");
+        }
+        return stock;
+    }
 
     public boolean chanceOfSuccess() {
         Random random = new Random();
-        Integer x = random.nextInt(100);
+        int x = random.nextInt(100);
         return x < 95;
     }
 
-    public String loadItemsToStock() {
+    public Stock loadItemsToStock(StockDTO stockDTO) {
         if (chanceOfSuccess()) {
-            Stock stock = new Stock();
-            stock.setName("test");
-            stock.getItems().add("Item-1");
-            stock.getItems().add("Item-2");
-            stock.getItems().add("Item-3");
-            Stock newStock = entityManager.merge(stock);
-            if (Objects.nonNull(newStock)) {
-                return "OK";
+            Stock stock = new Stock(stockDTO);
+            stock = entityManager.merge(stock);
+
+            if (Objects.nonNull(stock)) {
+                return stock;
             }
         }
-        return "Failure";
+        throw new HTTPException(Response.Status.CONFLICT.getStatusCode());
     }
 }

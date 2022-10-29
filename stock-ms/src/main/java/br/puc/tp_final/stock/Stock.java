@@ -30,6 +30,12 @@ public class Stock implements Serializable {
         this.items = stock.getItems();
     }
 
+    public Stock(StockDTO stockDTO) {
+        this.id = stockDTO.getId();
+        this.name = stockDTO.getName();
+        this.items = stockDTO.getItems();
+    }
+
     public long getId() {
         return id;
     }
@@ -52,5 +58,13 @@ public class Stock implements Serializable {
 
     public void setItems(List<String> items) {
         this.items = items;
+    }
+
+    public void addItem(String item) {
+        this.items.add(item);
+    }
+
+    public void removeItem(String item) {
+        this.items.remove(item);
     }
 }
