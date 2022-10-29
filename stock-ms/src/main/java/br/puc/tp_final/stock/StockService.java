@@ -18,7 +18,7 @@ public class StockService {
 
     public Stock downStock(Long id, String item) {
         if (chanceOfSuccess()) {
-            Stock stock = entityManager.find(Stock.class, id);
+            Stock stock = findStockById(id);
             stock.removeItem(item);
             return entityManager.merge(stock);
         }
@@ -51,7 +51,7 @@ public class StockService {
         return x < 95;
     }
 
-    public Stock loadItemsToStock(StockDTO stockDTO) {
+    public Stock createStock(StockDTO stockDTO) {
         if (chanceOfSuccess()) {
             Stock stock = new Stock(stockDTO);
             stock = entityManager.merge(stock);

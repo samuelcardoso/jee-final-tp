@@ -18,15 +18,15 @@ public class StockController {
     @POST
     @Path("")
     public Response createStock(StockDTO stockDTO, @Context UriInfo uriInfo) {
-        var stock = stockService.loadItemsToStock(stockDTO);
+        var stock = stockService.createStock(stockDTO);
         UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
         uriBuilder.path(String.valueOf(stock.getId()));
 
         return Response.created(uriBuilder.build()).build();
     }
 
-    @POST
-    @Path("/{id}/items/{item}/write_off")
+    @PATCH
+    @Path("/{id}/items/{item}")
     @Consumes("application/json")
     public Response downStock(@PathParam("id") Long id, @PathParam("item") String item, @Context UriInfo uriInfo) {
         var stock = stockService.downStock(id, item);
