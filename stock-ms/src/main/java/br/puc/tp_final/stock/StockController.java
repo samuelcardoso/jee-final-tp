@@ -4,6 +4,7 @@ import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 
 //http://localhost:8080/stock-ms/rest/stock/status/1
+
 @Path("stock")
 @Produces({"application/json"})
 public class StockController {
