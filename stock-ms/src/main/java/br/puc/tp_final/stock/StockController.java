@@ -15,21 +15,20 @@ public class StockController {
     @POST
     @Path("write_off")
     @Consumes("application/json")
-    public void pay() {
-        stockService.write_off();
+    public Stock pay(String item) {
+        return stockService.write_off(item);
     }
 
     @GET
     @Path("/status/{id}")
     @Consumes("application/json")
-    public String status() {
-        return stockService.status();
+    public String status(@PathParam("id") Long id) {
+        return stockService.status(id);
     }
 
-    @GET
-    @Path("/teste-pedido-aceito")
-    @Consumes("application/json")
-    public boolean TestePedidoAceito() {
-        return stockService.PedidoAceito();
+    @POST
+    @Path("load")
+    public String load() {
+       return stockService.loadItemsToStock();
     }
 }
