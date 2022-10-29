@@ -24,4 +24,11 @@ public class StockController {
     public String status() {
         return stockService.status();
     }
+
+    @GET
+    @Path("/teste-pedido-aceito")
+    @Consumes("application/json")
+    public boolean TestePedidoAceito() {
+        return stockService.PedidoAceito();
+    }
 }
