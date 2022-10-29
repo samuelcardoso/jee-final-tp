@@ -3,6 +3,8 @@ package br.puc.tp_final.stock;
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 
+//http://localhost:8080/stock-ms/rest/stock/status/1
+
 @Path("stock")
 @Produces({"application/json"})
 public class StockController {
@@ -22,5 +24,12 @@ public class StockController {
     @Consumes("application/json")
     public String status() {
         return stockService.status();
+    }
+
+    @GET
+    @Path("/teste-pedido-aceito")
+    @Consumes("application/json")
+    public boolean TestePedidoAceito() {
+        return stockService.PedidoAceito();
     }
 }

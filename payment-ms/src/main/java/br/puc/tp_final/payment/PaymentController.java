@@ -21,6 +21,8 @@ public class PaymentController {
     @Path("/status/{id}")
     @Consumes("application/json")
     public String status() {
+
+        System.out.println('x');
         return paymentService.status();
     }
 }
