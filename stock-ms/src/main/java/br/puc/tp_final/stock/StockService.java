@@ -40,7 +40,7 @@ public class StockService {
         Stock stock = entityManager.find(Stock.class, id);
 
         if(Objects.isNull(stock)){
-            throw new NotFoundException("Stock not found.");
+            throw new HTTPException(Response.Status.BAD_REQUEST.getStatusCode());
         }
         return stock;
     }
