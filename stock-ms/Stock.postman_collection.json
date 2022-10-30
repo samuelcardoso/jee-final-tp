@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "930fc61e-5735-42a0-b414-ced8d1797404",
+		"_postman_id": "aa6caa59-3cb1-4207-923c-6bc7f6c57fa6",
 		"name": "Stock",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20003387"
+		"_exporter_id": "9422838"
 	},
 	"item": [
 		{
@@ -21,12 +21,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/{{basePrefix}}/stock",
+					"raw": "http://localhost:8080/stock-ms/rest/stock",
+					"protocol": "http",
 					"host": [
-						"{{baseUrl}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"{{basePrefix}}",
+						"stock-ms",
+						"rest",
 						"stock"
 					]
 				}
@@ -34,12 +37,12 @@
 			"response": []
 		},
 		{
-			"name": "Write Off",
+			"name": "Get Status",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/{{basePrefix}}/stock/status/{id}",
+					"raw": "{{baseUrl}}/{{basePrefix}}/stock/status/1",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -47,14 +50,14 @@
 						"{{basePrefix}}",
 						"stock",
 						"status",
-						"{id}"
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Status",
+			"name": "Down Stock",
 			"request": {
 				"method": "PATCH",
 				"header": [],
@@ -76,10 +79,35 @@
 			"response": []
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "basePrefix",
-			"value": "rest/stock"
+			"value": "/stock-ms/rest"
+		},
+		{
+			"key": "baseUrl",
+			"value": "localhost:8080",
+			"type": "string"
 		}
 	]
 }

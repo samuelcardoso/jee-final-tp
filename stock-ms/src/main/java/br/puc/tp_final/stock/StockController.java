@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 
-@Path("stock")
+@Path("/stock")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class StockController {
@@ -32,11 +32,11 @@ public class StockController {
         }
     }
 
-    // http://localhost:8080/stock-ms/rest/stock/{id}/item/{item}/write_off
+    // http://localhost:8080/stock-ms/rest/stock/{id}/items/{name}/write_off
     @PATCH
-    @Path("/{id}/items/{item}/write_off")
+    @Path("/{id}/items/{name}/write_off")
     @Consumes("application/json")
-    public Response downStock(@PathParam("id") Long id, @PathParam("item") String item, @Context UriInfo uriInfo) {
+    public Response downStock(@PathParam("id") Long id, @PathParam("name") String item, @Context UriInfo uriInfo) {
         try {
             Stock stock = stockService.downStock(id, item);
             URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(stock.getId())).build();
