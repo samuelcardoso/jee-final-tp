@@ -3,10 +3,10 @@ package br.puc.tp_final.stock;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
 import jakarta.xml.ws.http.HTTPException;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -25,12 +25,12 @@ public class StockService {
         throw new HTTPException(Response.Status.CONFLICT.getStatusCode());
     }
 
-    public String status(Long id) {
+    public List<String> status(Long id) {
         if (chanceOfSuccess()) {
             Stock stock = findStockById(id);
 
             if (!stock.getItems().isEmpty()) {
-                return String.valueOf(stock.getItems().size());
+                return stock.getItems();
             }
         }
         throw new HTTPException(Response.Status.CONFLICT.getStatusCode());
@@ -39,7 +39,7 @@ public class StockService {
     private Stock findStockById(Long id) {
         Stock stock = entityManager.find(Stock.class, id);
 
-        if(Objects.isNull(stock)){
+        if (Objects.isNull(stock)) {
             throw new HTTPException(Response.Status.BAD_REQUEST.getStatusCode());
         }
         return stock;

@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "930fc61e-5735-42a0-b414-ced8d1797404",
+		"name": "Stock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20003387"
+	},
+	"item": [
+		{
+			"name": "Create Stock",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":  \"test\",\r\n   \"items\":  [\r\n       \"item-1\",\r\n       \"item-2\",\r\n       \"item-3\"\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/{{basePrefix}}/stock",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"{{basePrefix}}",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Write Off",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/{{basePrefix}}/stock/status/{id}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"{{basePrefix}}",
+						"stock",
+						"status",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/{{basePrefix}}/stock/{id}/items/{item}/write_off",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"{{basePrefix}}",
+						"stock",
+						"{id}",
+						"items",
+						"{item}",
+						"write_off"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "basePrefix",
+			"value": "rest/stock"
+		}
+	]
+}
