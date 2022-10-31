@@ -56,7 +56,7 @@ public class StockController {
     @Consumes("application/json")
     public Response status(@PathParam("id") Long id, @Context UriInfo uriInfo) {
         try {
-            List<String> status = stockService.status(id);
+            List<String> status = stockService.getStatus(id);
             URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(id)).build();
             return Response.created(uri).entity(status).build();
         } catch (Exception e) {
