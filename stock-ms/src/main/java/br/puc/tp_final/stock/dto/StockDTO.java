@@ -1,4 +1,4 @@
-package br.puc.tp_final.stock;
+package br.puc.tp_final.stock.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 

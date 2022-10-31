@@ -1,5 +1,6 @@
-package br.puc.tp_final.stock;
+package br.puc.tp_final.stock.model;
 
+import br.puc.tp_final.stock.dto.StockDTO;
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlRootElement;
 

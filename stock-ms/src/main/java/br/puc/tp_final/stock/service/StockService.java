@@ -1,5 +1,7 @@
-package br.puc.tp_final.stock;
+package br.puc.tp_final.stock.service;
 
+import br.puc.tp_final.stock.dto.StockDTO;
+import br.puc.tp_final.stock.model.Stock;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

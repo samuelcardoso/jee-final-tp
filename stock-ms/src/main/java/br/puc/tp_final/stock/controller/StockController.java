@@ -1,5 +1,8 @@
-package br.puc.tp_final.stock;
+package br.puc.tp_final.stock.controller;
 
+import br.puc.tp_final.stock.model.Stock;
+import br.puc.tp_final.stock.dto.StockDTO;
+import br.puc.tp_final.stock.service.StockService;
 import jakarta.ejb.EJB;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
