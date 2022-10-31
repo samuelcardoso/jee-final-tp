@@ -32,6 +32,12 @@ public class PaymentService {
 		entityManager.persist(p);
 	}
 
+	public Payment find(String payId){
+		Payment p = entityManager.find(Payment.class,payId);
+
+		return p;
+	}
+	
 	public EnumPaymentType randomType() {
 
 		Random v = new Random();

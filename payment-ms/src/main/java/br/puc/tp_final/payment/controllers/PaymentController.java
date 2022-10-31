@@ -37,6 +37,13 @@ public class PaymentController {
 	public List<Payment> status() {
 		return paymentService.findAll();
 	}
+	
+	@GET
+	@Path("status/{payId}")
+	@Consumes("application/json")
+	public Payment status(@PathParam("payId") String payId) {
+		return paymentService.find(payId);
+	}
 
 	@PUT
 	@Path("cancel/{payId}")
