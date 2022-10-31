@@ -1,6 +1,7 @@
 package br.puc.tp_final.stock;
 
 import jakarta.ejb.EJB;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
@@ -22,7 +23,7 @@ public class StockController {
     // http://localhost:8080/stock-ms/rest/stock
     @POST
     @Path("")
-    public Response createStock(StockDTO stockDTO, @Context UriInfo uriInfo) {
+    public Response createStock(@Valid StockDTO stockDTO, @Context UriInfo uriInfo) {
         try {
             Stock stock = stockService.createStock(stockDTO);
             URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(stock.getId())).build();
