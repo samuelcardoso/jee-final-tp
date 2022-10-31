@@ -44,7 +44,7 @@ public class StockController {
         try {
             Stock stock = stockService.downStock(id, item);
             URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(stock.getId())).build();
-            return Response.created(uri).entity(stock).build();
+            return Response.ok(uri).entity(stock).build();
         } catch (Exception e) {
             throw e;
         }
@@ -58,7 +58,7 @@ public class StockController {
         try {
             List<String> status = stockService.getStatus(id);
             URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(id)).build();
-            return Response.created(uri).entity(status).build();
+            return Response.ok(uri).entity(status).build();
         } catch (Exception e) {
             throw e;
         }
