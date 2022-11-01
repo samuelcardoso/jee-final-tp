@@ -54,7 +54,7 @@ public class StockService {
         Stock stock = entityManager.find(Stock.class, id);
 
         if (Objects.isNull(stock)) {
-            throw new HTTPException(Response.Status.BAD_REQUEST.getStatusCode());
+            throw new HTTPException(Response.Status.NOT_FOUND.getStatusCode());
         }
         return stock;
     }
