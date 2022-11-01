@@ -4,10 +4,14 @@ import br.puc.tp_final.track.domains.Client
 import br.puc.tp_final.track.domains.Order
 import br.puc.tp_final.track.domains.Product
 import br.puc.tp_final.track.domains.Status
+import br.puc.tp_final.track.exception.BadRequestException
+import br.puc.tp_final.track.exception.NotFoundException
+import br.puc.tp_final.track.exception.ServiceUnavailableException
 import br.puc.tp_final.track.repositories.ClientRepository
 import br.puc.tp_final.track.repositories.OrderRepository
 import br.puc.tp_final.track.repositories.ProductRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.Random
 import kotlin.collections.ArrayList
 
@@ -18,20 +22,32 @@ class TrackService(
     val productRepository: ProductRepository
     ) {
 
-    fun status(id: Int): Order? {
+    fun status(id: Int?): Order? {
 
-        var order: Order? = null
+        if(id==null) {
+            throw BadRequestException()
+        }
+
+        //AQUI ESTAMOS SIMULANDO QUE O USUARIO PASSOU UM CODIGO DE COMPRA QUE NÃO EXISTE
+        if(id != 1) {
+            throw NotFoundException()
+        }
+
+        val order: Order
 
         val success: Int = Random().nextInt(100) + 1
 
         if(success in 1..90) {
              order = simulateProductTrack()
+        } else {
+            throw ServiceUnavailableException()
         }
 
         return order
 
     }
 
+    @Transactional
     private fun simulateProductTrack(): Order {
 
         val listProducts = ArrayList<Product>()
