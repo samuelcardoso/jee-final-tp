@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "aa6caa59-3cb1-4207-923c-6bc7f6c57fa6",
+		"name": "Stock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9422838"
+	},
+	"item": [
+		{
+			"name": "Create Stock",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":  \"test\",\r\n   \"items\":  [\r\n       \"item-1\",\r\n       \"item-2\",\r\n       \"item-3\"\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/stock-ms/rest/stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stock-ms",
+						"rest",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/{{basePrefix}}/stock/status/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"{{basePrefix}}",
+						"stock",
+						"status",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Down Stock",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/{{basePrefix}}/stock/{id}/items/{item}/write_off",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"{{basePrefix}}",
+						"stock",
+						"{id}",
+						"items",
+						"{item}",
+						"write_off"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "basePrefix",
+			"value": "/stock-ms/rest"
+		},
+		{
+			"key": "baseUrl",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}
